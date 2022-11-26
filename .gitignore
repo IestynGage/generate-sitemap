@@ -1,0 +1,6 @@
+# Git won't keep track of files and directories listed in this file
+
+# Diretory
+node_modules
+
+# Files

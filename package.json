@@ -1,0 +1,12 @@
+{
+  "name": "generate-sitemap",
+  "version": "1.0.0",
+  "description": "Generates a site map",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "test"
+  },
+  "author": "Iestyn Gage",
+  "license": "MIT"
+}
