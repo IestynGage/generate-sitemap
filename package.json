@@ -5,11 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node ./src/index.js",
-    "test": "test"
+    "test": "jest"
   },
   "author": "Iestyn Gage",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.3.1",
+    "prettier": "^2.8.0"
   }
 }

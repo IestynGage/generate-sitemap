@@ -5,25 +5,28 @@ const fs = require('fs');
 
 //protect against null/undefined
 
-const readFiles = (directory) => {
-  let files = []
-  const directoryStats = fs.lstatSync(directory);
-  if (directoryStats.isDirectory()) {
-    console.log("is directory", directory)
-    const folder = path.dirname(directory + "/.");
-    fs.readdir(folder, (err, files) => {
-      files.forEach(file => {
-        console.log("file", file)
-        files.concat(readFiles(directory + "/" + file))
-      });
+const readFiles = (filePath) => {
+  let files = [];
+  const fileStats = fs.lstatSync(filePath);
+
+  console.log(filePath, fileStats.isDirectory())
+  if (fileStats.isDirectory()) {
+    fs.readdirSync(filePath).forEach(file => {
+      const newFilePath = filePath + "/" + file;
+      files = files.concat(readFiles(newFilePath));
     });
+    return files;
   } else {
-    console.log("is file", directory)
-    files[0] = directory;
+    return isHtmlFile(filePath) ? [filePath] :[]
   }
-  return files;
 }
 
-const a = readFiles('src/test/resource/simpleExampleTwo');
+const isHtmlFile = (path) => {
+  return path.endsWith(".html");
+}
+
+const a = readFiles('./src/test/resource/simpleExampleTwo');
 
 console.log(a)
+
+// module.exports = readFiles
