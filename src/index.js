@@ -3,9 +3,12 @@
 var path = require('path');
 const fs = require('fs');
 
-//protect against null/undefined
+const generateSitemap = (rootFilePath) => {
+  const htmlFiles = parseFiles(rootFilePath);
+  writeSitemap(htmlFiles, rootFilePath);
+}
 
-const readFiles = (filePath) => {
+const parseFiles = (filePath) => {
   let files = [];
   const fileStats = fs.lstatSync(filePath);
 
@@ -13,11 +16,11 @@ const readFiles = (filePath) => {
   if (fileStats.isDirectory()) {
     fs.readdirSync(filePath).forEach(file => {
       const newFilePath = filePath + "/" + file;
-      files = files.concat(readFiles(newFilePath));
+      files = files.concat(parseFiles(newFilePath));
     });
     return files;
   } else {
-    return isHtmlFile(filePath) ? [filePath] :[]
+    return isHtmlFile(filePath) ? [filePath] : [];
   }
 }
 
@@ -25,8 +28,27 @@ const isHtmlFile = (path) => {
   return path.endsWith(".html");
 }
 
-const a = readFiles('./src/test/resource/simpleExampleTwo');
+const writeSitemap = (htmlFiles, outputPath) => {
+  let urlElements = "";
+  htmlFiles.map(htmlFile => {
+    urlElements = urlElements.concat(
+    `<url>
+      <loc>${htmlFile}</loc>
+    </url>
+    `)});
+  let content = /** sitemap.xml */
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${urlElements}
+</urlset>`
 
-console.log(a)
+  fs.writeFile(`${outputPath}/sitemap.xml`, content, err => {
+    if (err) {
+      console.error(err);
+    }
+  });
+}
+
+generateSitemap('./src/test/resource/simpleExampleTwo');
+
 
 // module.exports = readFiles
