@@ -31,14 +31,12 @@ const isHtmlFile = (path) => {
 const writeSitemap = (htmlFiles, outputPath) => {
   let urlElements = "";
   htmlFiles.map(htmlFile => {
-    urlElements = urlElements.concat(
-    `<url>
-      <loc>${htmlFile}</loc>
-    </url>
-    `)});
+    urlElements = urlElements.concat(`
+  <url>
+    <loc>${htmlFile}</loc>
+  </url>`)});
   let content = /** sitemap.xml */
-  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${urlElements}
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlElements}
 </urlset>`
 
   fs.writeFile(`${outputPath}/sitemap.xml`, content, err => {
