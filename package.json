@@ -1,7 +1,11 @@
 {
-  "name": "generate-sitemap",
+  "name": "@hang-gliding-dinosaur/generate-sitemap",
   "version": "1.0.0",
-  "description": "Generates a site map",
+  "description": "Generates a site map from a repository",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IestynGage/generate-sitemap"
+  },
   "main": "src/index.js",
   "scripts": {
     "start": "node ./src/index.js",
@@ -12,5 +16,9 @@
   "devDependencies": {
     "jest": "^29.3.1",
     "prettier": "^2.8.0"
-  }
+  },
+  "keywords": [
+    "sitemap",
+    "generate sitemap"
+  ]
 }

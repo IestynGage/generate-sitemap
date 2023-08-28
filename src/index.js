@@ -1,6 +1,4 @@
-#!/usr/bin/node
-
-var path = require('path');
+const path = require('path');
 const fs = require('fs');
 
 const generateSitemap = (rootFilePath) => {
@@ -46,7 +44,4 @@ const writeSitemap = (htmlFiles, outputPath) => {
   });
 }
 
-generateSitemap('./src/test/resource/simpleExampleTwo');
-
-
-// module.exports = readFiles
+module.exports = generateSitemap
